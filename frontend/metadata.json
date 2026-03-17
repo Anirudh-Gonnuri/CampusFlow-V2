@@ -1,0 +1,5 @@
+{
+  "name": "CampusFlow",
+  "description": "A modular, theme-agnostic platform for managing campus events and activities with a powerful theme engine and discovery layer.",
+  "requestFramePermissions": []
+}
