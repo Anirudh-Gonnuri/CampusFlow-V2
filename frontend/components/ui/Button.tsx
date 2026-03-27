@@ -5,21 +5,21 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Button: React.FC<ButtonProps> = ({ 
-  children, 
-  variant = 'primary', 
-  size = 'md', 
-  className = '', 
-  ...props 
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
+  size = 'md',
+  className = '',
+  ...props
 }) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
-  
+  const baseStyles = "inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-900 disabled:opacity-40 disabled:pointer-events-none";
+
   const variants = {
-    primary: "bg-brand-600 text-white hover:bg-brand-700 focus:ring-brand-500",
-    secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500",
-    outline: "border border-gray-300 bg-transparent hover:bg-gray-50 text-gray-700 focus:ring-gray-500",
-    ghost: "bg-transparent hover:bg-gray-100 text-gray-700",
-    danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
+    primary:   "bg-gradient-to-r from-brand-600 to-brand-500 text-white hover:from-brand-700 hover:to-brand-600 shadow-sm hover:shadow-brand-600/30 hover:shadow-lg focus:ring-brand-500",
+    secondary: "bg-surface-700 text-white hover:bg-surface-600 focus:ring-surface-500",
+    outline:   "border border-white/10 bg-surface-800 text-gray-200 hover:bg-surface-700 hover:border-white/20 focus:ring-surface-500",
+    ghost:     "bg-transparent text-gray-300 hover:bg-surface-700 hover:text-white focus:ring-surface-500",
+    danger:    "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm",
   };
 
   const sizes = {
@@ -29,8 +29,8 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <button 
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`} 
+    <button
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}

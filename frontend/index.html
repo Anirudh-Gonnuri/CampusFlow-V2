@@ -4,27 +4,60 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="https://lucide.dev/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CampusFlow</title>
+    <title>CampusFlow — Your Campus, Connected</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-              mono: ['Roboto Mono', 'monospace'],
+              display: ['Space Grotesk', 'sans-serif'],
+              serif:  ['Space Grotesk', 'sans-serif'],
             },
             colors: {
               brand: {
-                50: '#f0f9ff',
-                100: '#e0f2fe',
-                500: '#0ea5e9',
-                600: '#0284c7',
-                900: '#0c4a6e',
-              }
-            }
+                50:  '#fff1f2',
+                100: '#ffe4e6',
+                200: '#fecdd3',
+                300: '#fda4af',
+                400: '#fb7185',
+                500: '#f43f5e',
+                600: '#e11d48',
+                700: '#be123c',
+                800: '#9f1239',
+                900: '#881337',
+              },
+              accent: {
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#f59e0b',
+                600: '#d97706',
+              },
+              surface: {
+                950: '#08080d',
+                900: '#0d0d14',
+                800: '#141420',
+                700: '#1c1c2a',
+                600: '#252535',
+                500: '#30303f',
+                400: '#3e3e50',
+                300: '#5a5a70',
+                200: '#8888a0',
+                100: '#b8b8cc',
+              },
+            },
+            animation: {
+              'fade-in':  'fadeIn 0.25s ease-out',
+              'slide-up': 'slideUp 0.3s ease-out',
+              'typing':   'typing 1.2s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeIn:  { '0%': { opacity: '0' },              '100%': { opacity: '1' } },
+              slideUp: { '0%': { transform: 'translateY(8px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+              typing:  { '0%,100%': { opacity: '.2' }, '50%': { opacity: '1' } },
+            },
           }
         }
       }

@@ -24,29 +24,29 @@ export const OrganizationProfile: React.FC = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-12">
+    <div className="min-h-screen pb-12">
         {/* Cover Image */}
-        <div className="h-48 md:h-64 bg-gray-200 w-full overflow-hidden relative">
-            <img src={orgDetails.coverImage} className="w-full h-full object-cover" alt="Cover" />
-            <div className="absolute inset-0 bg-black/20"></div>
+        <div className="h-48 md:h-64 bg-surface-700 w-full overflow-hidden relative">
+            <img src={orgDetails.coverImage} className="w-full h-full object-cover opacity-60" alt="Cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-transparent to-transparent"></div>
         </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative">
             {/* Header */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col md:flex-row items-start md:items-end gap-6 mb-8">
-                <div className="w-32 h-32 rounded-xl border-4 border-white shadow-md overflow-hidden bg-white -mt-12 flex-shrink-0">
+            <div className="bg-surface-800 rounded-2xl border border-white/8 p-6 flex flex-col md:flex-row items-start md:items-end gap-6 mb-8">
+                <div className="w-28 h-28 rounded-2xl border-4 border-surface-800 shadow-xl overflow-hidden bg-surface-700 -mt-12 flex-shrink-0">
                     <img src={orgDetails.logo} className="w-full h-full object-cover" alt="Logo" />
                 </div>
                 <div className="flex-1">
                     <div className="flex items-center gap-2">
-                        <h1 className="text-3xl font-bold text-gray-900">{orgDetails.name}</h1>
-                        {orgDetails.isVerified && <CheckCircle size={20} className="text-blue-500 fill-blue-50" />}
+                        <h1 className="text-3xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{orgDetails.name}</h1>
+                        {orgDetails.isVerified && <CheckCircle size={20} className="text-brand-400" />}
                     </div>
-                    <p className="text-gray-600 mt-2 max-w-2xl">{orgDetails.description}</p>
-                    <div className="flex flex-wrap gap-4 mt-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-1"><Users size={16} /> {orgDetails.members} members</div>
-                        <div className="flex items-center gap-1"><Mail size={16} /> {orgDetails.email}</div>
-                        <div className="flex items-center gap-1"><Globe size={16} /> {orgDetails.website}</div>
+                    <p className="text-surface-300 mt-2 max-w-2xl text-sm leading-relaxed">{orgDetails.description}</p>
+                    <div className="flex flex-wrap gap-4 mt-4 text-sm text-surface-400">
+                        <div className="flex items-center gap-1.5"><Users size={15} /> {orgDetails.members} members</div>
+                        <div className="flex items-center gap-1.5"><Mail size={15} /> {orgDetails.email}</div>
+                        <div className="flex items-center gap-1.5"><Globe size={15} /> {orgDetails.website}</div>
                     </div>
                 </div>
                 <div>
@@ -55,25 +55,25 @@ export const OrganizationProfile: React.FC = () => {
             </div>
 
             {/* Events Section */}
-            <h2 className="text-xl font-bold text-gray-900 mb-6 border-b pb-2">Upcoming Events</h2>
-            
+            <h2 className="text-xl font-bold text-white mb-6 border-b border-white/8 pb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Upcoming Events</h2>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {orgEvents.length > 0 ? (
                     orgEvents.map(event => (
                         <Link to={`/event/${event.id}`} key={event.id} className="group block">
-                            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow flex h-40">
-                                <div className="w-1/3 relative">
-                                    <img src={event.bannerImage} className="w-full h-full object-cover" alt={event.title} />
-                                    <div className="absolute top-2 left-2 bg-white/90 px-2 py-1 rounded text-xs font-bold text-gray-800">
+                            <div className="bg-surface-800 rounded-xl border border-white/8 overflow-hidden hover:border-brand-700/40 transition-all flex h-40">
+                                <div className="w-1/3 relative overflow-hidden">
+                                    <img src={event.bannerImage} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt={event.title} />
+                                    <div className="absolute top-2 left-2 bg-surface-900/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-bold text-white border border-white/8">
                                         {event.category}
                                     </div>
                                 </div>
                                 <div className="w-2/3 p-4 flex flex-col justify-between">
                                     <div>
-                                        <h3 className="font-bold text-lg text-gray-900 line-clamp-1 group-hover:text-brand-600 transition-colors">{event.title}</h3>
-                                        <p className="text-sm text-gray-500 line-clamp-2 mt-1">{event.description}</p>
+                                        <h3 className="font-bold text-white line-clamp-1 group-hover:text-brand-400 transition-colors">{event.title}</h3>
+                                        <p className="text-sm text-surface-400 line-clamp-2 mt-1">{event.description}</p>
                                     </div>
-                                    <div className="flex items-center gap-4 text-xs text-gray-500 mt-2">
+                                    <div className="flex items-center gap-4 text-xs text-surface-400 mt-2">
                                         <div className="flex items-center gap-1"><Calendar size={12} /> {new Date(event.date).toLocaleDateString()}</div>
                                         <div className="flex items-center gap-1"><MapPin size={12} /> {event.location}</div>
                                     </div>
@@ -82,8 +82,8 @@ export const OrganizationProfile: React.FC = () => {
                         </Link>
                     ))
                 ) : (
-                    <div className="col-span-full py-12 text-center bg-gray-50 rounded-xl border border-dashed border-gray-300">
-                        <p className="text-gray-500">No active events from this organization.</p>
+                    <div className="col-span-full py-12 text-center bg-surface-800 rounded-xl border border-dashed border-white/10">
+                        <p className="text-surface-400">No active events from this organization.</p>
                     </div>
                 )}
             </div>
