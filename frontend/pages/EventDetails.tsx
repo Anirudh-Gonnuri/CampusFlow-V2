@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from '../context/AppContext';
 import { useApp } from '../context/AppContext';
-import { Calendar, MapPin, Users, Share2, ArrowLeft, Trophy, Clock, Grid, Image as ImageIcon, BarChart2, Bell, AlertCircle, CheckCircle, X, QrCode, UserPlus, LogIn, Upload, Plus } from 'lucide-react';
+import { Calendar, MapPin, Users, Share2, ArrowLeft, Trophy, Clock, Grid, Image as ImageIcon, BarChart2, Bell, AlertCircle, CheckCircle, X, QrCode, UserPlus, LogIn, Upload, Plus, Zap } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ScheduleItem, LeaderboardEntry, VotingPoll, Announcement, RegistrationFormField, TeamFormationData, Team } from '../types';
 
@@ -19,7 +19,7 @@ export const EventDetails: React.FC = () => {
   const [newImageUrl, setNewImageUrl] = useState('');
 
   if (!event) {
-    return <div className="p-8 text-center">Event not found. <Link to="/" className="text-blue-500">Go Back</Link></div>;
+    return <div className="p-8 text-center">Event not found. <Link to="/" className="text-brand-400 font-semibold hover:underline">Go Back</Link></div>;
   }
 
   const { theme } = event;
@@ -89,13 +89,23 @@ export const EventDetails: React.FC = () => {
     <div style={customStyles} className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
       
       {/* Dynamic Navigation for Event Microsite */}
-      <nav className="sticky top-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--primary)]/10 px-4 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">
-            <ArrowLeft size={20} />
-            <span className="font-medium">Back to Discovery</span>
-          </Link>
-          <div className="font-bold text-xl tracking-wider uppercase" style={{ color: 'var(--primary)' }}>
+      <nav className="sticky top-0 z-50 glass bg-[var(--bg)]/80 backdrop-blur-xl border-b border-white/10 px-4 h-16 flex items-center shadow-lg">
+        <div className="max-w-6xl w-full mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-6">
+              <Link to="/" className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-800 hover:bg-surface-700 text-white transition-colors border border-white/10 shadow-sm group">
+                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+              </Link>
+              
+              <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-600 to-brand-400 flex items-center justify-center shadow-sm glow-red">
+                  <Zap size={16} className="text-white" />
+                </div>
+                <span className="text-lg font-bold text-white tracking-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Campus<span className="text-brand-400">Flow</span>
+                </span>
+              </Link>
+          </div>
+          <div className="hidden sm:block opacity-60 font-bold tracking-widest text-sm uppercase px-3 py-1 bg-white/5 rounded-full border border-white/10 text-white">
             {event.organization}
           </div>
           <div className="flex items-center gap-2">
@@ -114,12 +124,15 @@ export const EventDetails: React.FC = () => {
             >
                 <Share2 size={18} />
             </Button>
+            <Button className="bg-[var(--secondary)]/20 text-[var(--text)] hover:bg-[var(--primary)] hover:text-white transition-all border-none">
+                <Calendar size={18} />
+            </Button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <header className={`relative ${theme.layout === 'hero' ? 'h-[60vh]' : 'h-[40vh]'} w-full overflow-hidden`}>
+      <header className={`relative ${theme.layout === 'hero' ? 'min-h-[60vh]' : 'min-h-[40vh]'} w-full overflow-hidden flex flex-col justify-end`}>
         <img 
           src={event.bannerImage} 
           alt={event.title} 
@@ -127,7 +140,7 @@ export const EventDetails: React.FC = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/60 to-transparent"></div>
         
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 max-w-6xl mx-auto">
+        <div className="relative z-10 w-full p-8 md:p-16 pt-24 max-w-6xl mx-auto">
           <div className="animate-fade-in-up">
             <span className="inline-block px-4 py-1 rounded-full bg-[var(--primary)] text-white text-sm font-bold mb-4 uppercase tracking-widest">
               {event.category}
@@ -135,6 +148,10 @@ export const EventDetails: React.FC = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight" style={{ color: 'var(--text)' }}>
               {event.title}
             </h1>
+            <div className="flex items-center gap-3 mb-6 bg-[var(--bg)]/40 w-max pr-4 p-1 rounded-full backdrop-blur-md border border-white/10">
+               <div className="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center font-bold text-white text-xs">{event.organization.substring(0,2)}</div>
+               <span className="text-sm font-medium text-white shadow-sm">Hosted by {event.organization}</span>
+            </div>
             <div className="flex flex-wrap gap-6 text-[var(--text)] opacity-90 text-lg">
               <div className="flex items-center gap-2">
                 <Calendar className="text-[var(--primary)]" />
@@ -155,17 +172,17 @@ export const EventDetails: React.FC = () => {
         <div className="lg:col-span-2 space-y-12">
           
           {/* Module Navigation Tabs */}
-          <div className="flex gap-4 border-b border-[var(--text)]/10 pb-1 overflow-x-auto">
+          <div className="flex gap-4 border-b border-[var(--text)]/20 pb-1 overflow-x-auto">
             <button 
               onClick={() => setActiveTab('overview')}
-              className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'overview' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+              className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'overview' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
             >
               Overview
             </button>
             {hasModule('ANNOUNCEMENTS') && (
               <button 
                 onClick={() => setActiveTab('announcements')}
-                className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'announcements' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+                className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'announcements' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
               >
                 Updates
               </button>
@@ -173,7 +190,7 @@ export const EventDetails: React.FC = () => {
              {hasModule('TEAM_FORMATION') && (
               <button 
                 onClick={() => setActiveTab('teams')}
-                className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'teams' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+                className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'teams' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
               >
                 Teams
               </button>
@@ -181,7 +198,7 @@ export const EventDetails: React.FC = () => {
             {hasModule('SCHEDULE') && (
               <button 
                 onClick={() => setActiveTab('schedule')}
-                className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'schedule' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+                className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'schedule' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
               >
                 Schedule
               </button>
@@ -189,7 +206,7 @@ export const EventDetails: React.FC = () => {
              {hasModule('LEADERBOARD') && (
               <button 
                 onClick={() => setActiveTab('leaderboard')}
-                className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'leaderboard' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+                className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'leaderboard' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
               >
                 Leaderboard
               </button>
@@ -197,7 +214,7 @@ export const EventDetails: React.FC = () => {
             {hasModule('VOTING') && (
               <button 
                 onClick={() => setActiveTab('voting')}
-                className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'voting' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+                className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'voting' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
               >
                 Live Polls
               </button>
@@ -205,7 +222,7 @@ export const EventDetails: React.FC = () => {
             {hasModule('GALLERY') && (
               <button 
                 onClick={() => setActiveTab('gallery')}
-                className={`pb-3 px-2 font-medium transition-colors border-b-2 ${activeTab === 'gallery' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/60 hover:text-[var(--text)]'}`}
+                className={`pb-3 px-2 font-medium transition-colors border-b-2 hover:border-[var(--primary)]/50 ${activeTab === 'gallery' ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-[var(--text)]/90 hover:text-[var(--text)]'}`}
               >
                 Gallery
               </button>
@@ -218,13 +235,13 @@ export const EventDetails: React.FC = () => {
               <div className="prose prose-lg max-w-none" style={{ color: 'var(--text)' }}>
                 <p className="text-xl leading-relaxed opacity-90">{event.description}</p>
                 <div className="mt-8 grid grid-cols-2 gap-4">
-                    <div className="p-6 rounded-xl border border-[var(--text)]/10 bg-[var(--secondary)]/5">
+                    <div className="p-6 rounded-xl border border-[var(--text)]/20 bg-[var(--secondary)]/5">
                         <h3 className="font-bold text-lg mb-2 flex items-center gap-2"><Users size={20} /> Who can attend?</h3>
-                        <p className="opacity-70">Open to all students across departments.</p>
+                        <p className="opacity-100">Open to all students across departments.</p>
                     </div>
-                    <div className="p-6 rounded-xl border border-[var(--text)]/10 bg-[var(--secondary)]/5">
+                    <div className="p-6 rounded-xl border border-[var(--text)]/20 bg-[var(--secondary)]/5">
                         <h3 className="font-bold text-lg mb-2 flex items-center gap-2"><Trophy size={20} /> Prizes</h3>
-                        <p className="opacity-70">Certificates and goodies for winners.</p>
+                        <p className="opacity-100">Certificates and goodies for winners.</p>
                     </div>
                 </div>
               </div>
@@ -240,13 +257,13 @@ export const EventDetails: React.FC = () => {
                                     {item.priority === 'URGENT' && <AlertCircle size={20} />}
                                     {item.title}
                                 </h3>
-                                <span className="text-sm opacity-60">{new Date(item.timestamp).toLocaleDateString()}</span>
+                                <span className="text-sm opacity-90">{new Date(item.timestamp).toLocaleDateString()}</span>
                             </div>
-                            <p className="opacity-80 leading-relaxed">{item.message}</p>
+                            <p className="opacity-100 leading-relaxed">{item.message}</p>
                         </div>
                     ))
                  ) : (
-                    <p className="text-center opacity-50 py-10 italic">No updates yet.</p>
+                    <p className="text-center opacity-100 py-10 italic">No updates yet.</p>
                  )}
               </div>
             )}
@@ -256,7 +273,7 @@ export const EventDetails: React.FC = () => {
                     <div className="flex justify-between items-center bg-[var(--secondary)]/10 p-4 rounded-xl">
                         <div>
                             <h3 className="font-bold text-lg">Find Your Team</h3>
-                            <p className="opacity-70 text-sm">Join an existing team or start your own.</p>
+                            <p className="opacity-100 text-sm">Join an existing team or start your own.</p>
                         </div>
                         {!userTeam ? (
                             <Button className="bg-[var(--primary)] text-white border-none" onClick={handleCreateTeam}>
@@ -265,7 +282,7 @@ export const EventDetails: React.FC = () => {
                         ) : (
                             <div className="flex items-center gap-4">
                                 <div className="text-right">
-                                    <span className="block text-xs uppercase opacity-50 font-bold">Your Team</span>
+                                    <span className="block text-xs uppercase opacity-100 font-bold">Your Team</span>
                                     <span className="font-bold text-lg">{userTeam.name}</span>
                                 </div>
                                 <Button size="sm" variant="danger" onClick={() => leaveTeam(event.id, userTeam.id)}>
@@ -278,12 +295,12 @@ export const EventDetails: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {teams.map((team) => (
                             <div key={team.id} className={`border rounded-xl p-5 transition-colors relative overflow-hidden group ${
-                                userTeam?.id === team.id ? 'border-[var(--primary)] bg-[var(--primary)]/5' : 'border-[var(--text)]/10 hover:border-[var(--primary)]'
+                                userTeam?.id === team.id ? 'border-[var(--primary)] bg-[var(--primary)]/5' : 'border-[var(--text)]/20 hover:border-[var(--primary)]'
                             }`}>
                                 <div className="flex justify-between items-start mb-3">
                                     <div>
                                         <h4 className="font-bold text-xl">{team.name}</h4>
-                                        {team.description && <p className="text-xs opacity-60 mt-1">{team.description}</p>}
+                                        {team.description && <p className="text-xs opacity-90 mt-1">{team.description}</p>}
                                     </div>
                                     <span className="text-xs font-mono bg-[var(--secondary)]/10 px-2 py-1 rounded">
                                         {team.members.length}/{teamData.maxTeamSize}
@@ -291,8 +308,8 @@ export const EventDetails: React.FC = () => {
                                 </div>
                                 <div className="space-y-2 mb-4">
                                     {team.members.map(member => (
-                                        <div key={member.id} className="flex items-center gap-2 text-sm opacity-80">
-                                            <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-700 overflow-hidden">
+                                        <div key={member.id} className="flex items-center gap-2 text-sm opacity-100">
+                                            <div className="w-6 h-6 rounded-full bg-surface-700 flex items-center justify-center text-[10px] font-bold text-surface-200 overflow-hidden">
                                                 {member.avatar ? <img src={member.avatar} className="w-full h-full object-cover"/> : member.name.substring(0,2)}
                                             </div>
                                             <span>{member.name} {member.role === 'LEADER' && '👑'}</span>
@@ -313,8 +330,8 @@ export const EventDetails: React.FC = () => {
                             </div>
                         ))}
                         {teams.length === 0 && (
-                            <div className="col-span-2 text-center py-12 border-2 border-dashed border-[var(--text)]/10 rounded-xl opacity-50">
-                                <Users size={48} className="mx-auto mb-4 opacity-50" />
+                            <div className="col-span-2 text-center py-12 border-2 border-dashed border-[var(--text)]/20 rounded-xl opacity-100">
+                                <Users size={48} className="mx-auto mb-4 opacity-100" />
                                 <p>No teams formed yet. Be the first!</p>
                             </div>
                         )}
@@ -327,22 +344,22 @@ export const EventDetails: React.FC = () => {
                 {(getModuleData('SCHEDULE') as ScheduleItem[]).length > 0 ? (
                     (getModuleData('SCHEDULE') as ScheduleItem[]).sort((a,b) => a.time.localeCompare(b.time)).map((item, i) => (
                       <div key={i} className="flex gap-6 group">
-                        <div className="w-24 pt-2 text-right font-mono opacity-60 group-hover:text-[var(--primary)] transition-colors">{item.time}</div>
-                        <div className="flex-1 pb-6 border-l-2 border-[var(--text)]/10 pl-6 group-hover:border-[var(--primary)] transition-colors relative">
+                        <div className="w-24 pt-2 text-right font-mono opacity-90 group-hover:text-[var(--primary)] transition-colors">{item.time}</div>
+                        <div className="flex-1 pb-6 border-l-2 border-[var(--text)]/20 pl-6 group-hover:border-[var(--primary)] transition-colors relative">
                           <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-[var(--bg)] border-2 border-[var(--text)]/30 group-hover:border-[var(--primary)] group-hover:bg-[var(--primary)] transition-colors"></div>
                           <h4 className="text-xl font-bold">{item.title}</h4>
-                          <p className="opacity-60">{item.location}</p>
+                          <p className="opacity-90">{item.location}</p>
                         </div>
                       </div>
                     ))
                 ) : (
-                    <p className="text-center opacity-50 py-10 italic">Schedule to be announced.</p>
+                    <p className="text-center opacity-100 py-10 italic">Schedule to be announced.</p>
                 )}
               </div>
             )}
 
             {activeTab === 'leaderboard' && (
-              <div className="border border-[var(--text)]/10 rounded-xl overflow-hidden">
+              <div className="border border-[var(--text)]/20 rounded-xl overflow-hidden">
                 <table className="w-full text-left">
                   <thead className="bg-[var(--secondary)]/10 text-[var(--primary)]">
                     <tr>
@@ -362,7 +379,7 @@ export const EventDetails: React.FC = () => {
                       </tr>
                     ))}
                     {(getModuleData('LEADERBOARD') as LeaderboardEntry[]).length === 0 && (
-                        <tr><td colSpan={3} className="p-8 text-center opacity-50 italic">No entries yet.</td></tr>
+                        <tr><td colSpan={3} className="p-8 text-center opacity-100 italic">No entries yet.</td></tr>
                     )}
                   </tbody>
                 </table>
@@ -376,7 +393,7 @@ export const EventDetails: React.FC = () => {
                     const totalVotes = poll.options.reduce((acc, opt) => acc + opt.votes, 0);
                     
                     return (
-                    <div key={poll.id} className="bg-[var(--secondary)]/5 p-6 rounded-xl border border-[var(--text)]/10">
+                    <div key={poll.id} className="bg-[var(--secondary)]/5 p-6 rounded-xl border border-[var(--text)]/20">
                       <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
                         <div className="bg-[var(--primary)] text-white p-2 rounded-full">
                             <BarChart2 size={20} />
@@ -412,19 +429,19 @@ export const EventDetails: React.FC = () => {
                                 {poll.userVotedOptionId ? (
                                     <span className="font-bold">{percentage}%</span>
                                 ) : (
-                                    <span className="text-sm opacity-60">Vote &rarr;</span>
+                                    <span className="text-sm opacity-90">Vote &rarr;</span>
                                 )}
                             </div>
                           </button>
                         )})}
                       </div>
                       {poll.userVotedOptionId && (
-                          <p className="text-center text-sm opacity-60 mt-4">You have voted in this poll.</p>
+                          <p className="text-center text-sm opacity-90 mt-4">You have voted in this poll.</p>
                       )}
                     </div>
                   )})
                 ) : (
-                    <p className="text-center opacity-50 py-10 italic">No active polls at the moment.</p>
+                    <p className="text-center opacity-100 py-10 italic">No active polls at the moment.</p>
                 )}
               </div>
             )}
@@ -432,7 +449,7 @@ export const EventDetails: React.FC = () => {
              {activeTab === 'gallery' && (
                <div className="space-y-6">
                  <div className="flex justify-between items-center">
-                     <p className="opacity-70 italic">{user ? "Share your moments from the event." : "Log in to share photos."}</p>
+                     <p className="opacity-100 italic">{user ? "Share your moments from the event." : "Log in to share photos."}</p>
                      <Button size="sm" className="bg-[var(--primary)] text-white border-none" onClick={handleUploadPhoto}>
                          <Upload size={16} className="mr-2"/> Upload Photo
                      </Button>
@@ -440,7 +457,7 @@ export const EventDetails: React.FC = () => {
                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {(getModuleData('GALLERY') as string[]).length > 0 ? (
                         (getModuleData('GALLERY') as string[]).map((url, n) => (
-                            <div key={n} className="aspect-square bg-[var(--secondary)]/10 rounded-lg overflow-hidden border border-[var(--text)]/10 hover:opacity-80 transition-opacity cursor-pointer group relative">
+                            <div key={n} className="aspect-square bg-[var(--secondary)]/10 rounded-lg overflow-hidden border border-[var(--text)]/20 hover:opacity-100 transition-opacity cursor-pointer group relative">
                             <img src={url} alt={`Gallery ${n}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                     <ImageIcon className="text-white drop-shadow-lg" size={32} />
@@ -448,8 +465,8 @@ export const EventDetails: React.FC = () => {
                             </div>
                         ))
                     ) : (
-                        <div className="col-span-3 text-center opacity-50 py-10 italic border-2 border-dashed border-[var(--text)]/10 rounded-xl">
-                            <ImageIcon size={48} className="mx-auto mb-2 opacity-50" />
+                        <div className="col-span-3 text-center opacity-100 py-10 italic border-2 border-dashed border-[var(--text)]/20 rounded-xl">
+                            <ImageIcon size={48} className="mx-auto mb-2 opacity-100" />
                             No photos added yet. Be the first!
                         </div>
                     )}
@@ -462,34 +479,29 @@ export const EventDetails: React.FC = () => {
         {/* Sidebar / CTA */}
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-6">
-            <div className="p-8 rounded-2xl bg-[var(--bg)] border border-[var(--text)]/10 shadow-2xl shadow-[var(--primary)]/5">
+            <div className="p-8 rounded-2xl bg-[var(--bg)] border border-[var(--text)]/20 shadow-2xl shadow-[var(--primary)]/5">
                 <h3 className="text-2xl font-bold mb-2">{userIsRegistered ? "You're Going!" : "Ready to join?"}</h3>
-                <p className="opacity-70 mb-8">{userIsRegistered ? "See you there! Don't forget your ticket." : "Secure your spot for this event. Spots are filling up fast."}</p>
+                <p className="opacity-100 mb-8">{userIsRegistered ? "See you there! Don't forget your ticket." : "Secure your spot for this event. Spots are filling up fast."}</p>
                 
-                {hasModule('REGISTRATION') ? (
-                  !userIsRegistered ? (
+                {!userIsRegistered ? (
                     <Button 
-                        className="w-full py-4 text-lg font-bold shadow-lg transform hover:scale-105 transition-all duration-200 border-none"
+                        className="w-full py-4 text-lg font-bold shadow-xl shadow-[var(--primary)]/20 transform hover:scale-105 transition-all duration-200 border-none relative overflow-hidden group"
                         style={{ backgroundColor: 'var(--primary)', color: '#fff' }}
                         onClick={handleRegisterClick}
                     >
-                        Register Now
+                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span className="relative z-10 flex items-center justify-center gap-2">Register Now &rarr;</span>
                     </Button>
                   ) : (
                     <Button 
-                        className="w-full py-4 text-lg font-bold shadow-lg transition-all duration-200 border-none bg-green-600 text-white hover:bg-green-700"
+                        className="w-full py-4 text-lg font-bold shadow-lg transition-all duration-200 border border-green-500/30 bg-green-500/10 text-green-400 hover:bg-green-500/20 glass"
                         onClick={() => setShowTicket(true)}
                     >
-                        View Ticket
+                        View Ticket Pass
                     </Button>
-                  )
-                ) : (
-                <div className="p-4 bg-[var(--secondary)]/10 rounded text-center opacity-70">
-                    Registration Closed
-                </div>
-                )}
+                  )}
 
-                <div className="mt-8 space-y-4 text-sm opacity-70">
+                <div className="mt-8 space-y-4 text-sm opacity-100">
                 <div className="flex justify-between">
                     <span>Registration Status</span>
                     <span className="font-bold text-[var(--primary)]">Open</span>
@@ -507,13 +519,13 @@ export const EventDetails: React.FC = () => {
 
             {/* Sidebar Feed Preview if Module is Active */}
             {hasModule('ANNOUNCEMENTS') && getModuleData('ANNOUNCEMENTS').length > 0 && (
-                 <div className="p-6 rounded-2xl bg-[var(--secondary)]/5 border border-[var(--text)]/10">
+                 <div className="p-6 rounded-2xl bg-[var(--secondary)]/5 border border-[var(--text)]/20">
                     <h3 className="font-bold mb-4 flex items-center gap-2"><Bell size={18} /> Recent Updates</h3>
                     <div className="space-y-4">
                         {(getModuleData('ANNOUNCEMENTS') as Announcement[]).slice(0, 3).map(item => (
-                             <div key={item.id} className="pb-3 border-b border-[var(--text)]/10 last:border-0">
+                             <div key={item.id} className="pb-3 border-b border-[var(--text)]/20 last:border-0">
                                 <p className="font-medium text-sm mb-1">{item.title}</p>
-                                <p className="text-xs opacity-60 line-clamp-2">{item.message}</p>
+                                <p className="text-xs opacity-90 line-clamp-2">{item.message}</p>
                              </div>
                         ))}
                     </div>
@@ -526,44 +538,44 @@ export const EventDetails: React.FC = () => {
       {/* Registration Modal */}
       {isRegisterModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-              <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-300">
-                  <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                      <h3 className="text-xl font-bold text-gray-900">Register for Event</h3>
-                      <button onClick={() => setIsRegisterModalOpen(false)} className="text-gray-500 hover:text-gray-700">
+              <div className="bg-surface-800 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-300">
+                  <div className="p-6 border-b border-white/10 flex justify-between items-center bg-surface-900">
+                      <h3 className="text-xl font-bold text-white">Register for Event</h3>
+                      <button onClick={() => setIsRegisterModalOpen(false)} className="text-[var(--primary)] hover:text-surface-200">
                           <X size={20} />
                       </button>
                   </div>
                   <form onSubmit={handleRegistrationSubmit} className="p-6 space-y-4">
                       {/* Default Fields */}
                       <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                          <input className="w-full border rounded-lg p-2 text-gray-900" defaultValue={user?.name} readOnly />
+                          <label className="block text-sm font-medium text-surface-200 mb-1">Full Name</label>
+                          <input className="w-full border rounded-lg p-2 bg-surface-950 text-white placeholder-surface-500 border-white/20 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all" defaultValue={user?.name} readOnly />
                       </div>
                       <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                          <input className="w-full border rounded-lg p-2 text-gray-900" defaultValue={user?.email} readOnly />
+                          <label className="block text-sm font-medium text-surface-200 mb-1">Email</label>
+                          <input className="w-full border rounded-lg p-2 bg-surface-950 text-white placeholder-surface-500 border-white/20 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all" defaultValue={user?.email} readOnly />
                       </div>
                       
                       {/* Dynamic Custom Fields */}
                       {(getModuleData('REGISTRATION') as RegistrationFormField[])?.map((field) => (
                           <div key={field.id}>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label className="block text-sm font-medium text-surface-200 mb-1">
                                   {field.label} {field.required && <span className="text-red-500">*</span>}
                               </label>
                               {field.type === 'text' || field.type === 'email' ? (
                                   <input 
                                     type={field.type} 
-                                    className="w-full border rounded-lg p-2 text-gray-900" 
+                                    className="w-full border rounded-lg p-2 bg-surface-950 text-white placeholder-surface-500 border-white/20 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all" 
                                     required={field.required}
                                     placeholder={`Enter your ${field.label.toLowerCase()}`}
                                   />
                               ) : field.type === 'select' ? (
-                                  <select className="w-full border rounded-lg p-2 text-gray-900" required={field.required}>
+                                  <select className="w-full border rounded-lg p-2 bg-surface-950 text-white placeholder-surface-500 border-white/20 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all" required={field.required}>
                                       <option value="">Select an option</option>
                                       {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                                   </select>
                               ) : field.type === 'checkbox' ? (
-                                  <label className="flex items-center gap-2 text-gray-700">
+                                  <label className="flex items-center gap-2 text-surface-200">
                                       <input type="checkbox" required={field.required} />
                                       <span>I agree</span>
                                   </label>
@@ -580,24 +592,24 @@ export const EventDetails: React.FC = () => {
       {/* Ticket Modal */}
        {showTicket && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-              <div className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-in fade-in zoom-in duration-300 relative">
-                  <button onClick={() => setShowTicket(false)} className="absolute top-4 right-4 z-10 p-1 bg-white/50 rounded-full hover:bg-white text-gray-800">
+              <div className="bg-surface-800 rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-in fade-in zoom-in duration-300 relative">
+                  <button onClick={() => setShowTicket(false)} className="absolute top-4 right-4 z-10 p-1 bg-surface-800/50 rounded-full hover:bg-surface-800 text-surface-100">
                       <X size={20} />
                   </button>
                   <div className="bg-[var(--primary)] p-6 text-white text-center relative overflow-hidden" style={{ backgroundColor: theme.primaryColor }}>
                       <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
                       <h2 className="text-2xl font-bold relative z-10">{event.title}</h2>
-                      <p className="opacity-80 text-sm relative z-10">{new Date(event.date).toLocaleDateString()} • {event.location}</p>
+                      <p className="opacity-100 text-sm relative z-10">{new Date(event.date).toLocaleDateString()} • {event.location}</p>
                   </div>
                   <div className="p-8 flex flex-col items-center">
-                      <div className="w-48 h-48 bg-gray-900 rounded-xl mb-6 flex items-center justify-center text-white">
+                      <div className="w-48 h-48 bg-surface-950 rounded-xl mb-6 flex items-center justify-center text-white">
                           {/* Placeholder for real QR code */}
                           <QrCode size={120} />
                       </div>
                       <div className="text-center space-y-1">
-                          <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">Attendee</p>
-                          <p className="text-xl font-bold text-gray-900">{user?.name || 'Guest User'}</p>
-                          <p className="text-sm text-gray-500">{user?.department || 'General'}</p>
+                          <p className="text-xs text-surface-300 uppercase tracking-widest font-bold">Attendee</p>
+                          <p className="text-xl font-bold text-white">{user?.name || 'Guest User'}</p>
+                          <p className="text-sm text-[var(--primary)]">{user?.department || 'General'}</p>
                       </div>
                       {hasModule('QR_CHECKIN') && (
                         <div className="mt-6 flex items-center gap-2 text-xs text-green-600 bg-green-50 px-3 py-1 rounded-full">
@@ -606,9 +618,9 @@ export const EventDetails: React.FC = () => {
                         </div>
                       )}
                   </div>
-                  <div className="border-t-2 border-dashed border-gray-200 p-4 bg-gray-50 flex justify-between items-center text-xs text-gray-400">
+                  <div className="border-t-2 border-dashed border-white/20 p-4 bg-surface-900 flex justify-between items-center text-xs text-surface-300">
                       <span>Order #123456</span>
-                      <span>CampusFlow</span>
+                      <span className="flex items-center gap-1 font-bold tracking-tight"><Zap size={10} className="text-brand-400"/> Campus<span className="text-brand-400">Flow</span></span>
                   </div>
               </div>
           </div>

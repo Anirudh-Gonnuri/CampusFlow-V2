@@ -57,7 +57,7 @@ export const EventBuilder: React.FC = () => {
         return (
             <div className="p-8 text-center">
                 <h2 className="text-xl font-bold text-red-600 mb-2">Unauthorized Access</h2>
-                <p className="text-gray-600">You do not have permission to edit this event.</p>
+                <p className="text-surface-300">You do not have permission to edit this event.</p>
                 <Button onClick={() => navigate('/dashboard')} className="mt-4">Back to Dashboard</Button>
             </div>
         );
@@ -277,15 +277,15 @@ export const EventBuilder: React.FC = () => {
         <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
 
             {/* LEFT PANEL - CONTROLS */}
-            <div className="w-1/3 bg-white border-r border-gray-200 overflow-y-auto flex flex-col">
-                <div className="p-6 border-b border-gray-200">
-                    <h1 className="text-2xl font-bold text-gray-900 mb-4">{editId ? 'Edit Event' : 'Create Event'}</h1>
-                    <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+            <div className="w-1/3 bg-surface-800 border-r border-white/10 overflow-y-auto flex flex-col">
+                <div className="p-6 border-b border-white/10">
+                    <h1 className="text-2xl font-bold text-white mb-4">{editId ? 'Edit Event' : 'Create Event'}</h1>
+                    <div className="flex space-x-2 bg-[var(--bg)] p-1 rounded-lg">
                         {['DETAILS', 'THEME', 'MODULES'].map((step) => (
                             <button
                                 key={step}
                                 onClick={() => setActiveStep(step as any)}
-                                className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all ${activeStep === step ? 'bg-white shadow text-brand-600' : 'text-gray-500 hover:text-gray-700'
+                                className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all ${activeStep === step ? 'bg-surface-800 shadow text-brand-400' : 'text-surface-300 hover:text-surface-200'
                                     }`}
                             >
                                 {step}
@@ -298,34 +298,34 @@ export const EventBuilder: React.FC = () => {
                     {activeStep === 'DETAILS' && (
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Event Title</label>
+                                <label className="block text-sm font-medium text-surface-200 mb-1">Event Title</label>
                                 <input
-                                    className="w-full border rounded-md p-2 focus:ring-2 focus:ring-brand-500 outline-none"
+                                    className="w-full border rounded-md p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:ring-2 focus:ring-brand-500 outline-none"
                                     value={formData.title}
                                     onChange={e => setFormData({ ...formData, title: e.target.value })}
                                     placeholder="e.g. Annual Tech Symposium"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                <label className="block text-sm font-medium text-surface-200 mb-1">Description</label>
                                 <textarea
-                                    className="w-full border rounded-md p-2 focus:ring-2 focus:ring-brand-500 outline-none h-32"
+                                    className="w-full border rounded-md p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:ring-2 focus:ring-brand-500 outline-none h-32"
                                     value={formData.description}
                                     onChange={e => setFormData({ ...formData, description: e.target.value })}
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                                    <input type="datetime-local" className="w-full border rounded-md p-2"
+                                    <label className="block text-sm font-medium text-surface-200 mb-1">Date</label>
+                                    <input type="datetime-local" className="w-full border rounded-md p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
                                         value={formData.date}
                                         onChange={e => setFormData({ ...formData, date: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                    <label className="block text-sm font-medium text-surface-200 mb-1">Category</label>
                                     <select
-                                        className="w-full border rounded-md p-2"
+                                        className="w-full border rounded-md p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
                                         value={formData.category}
                                         onChange={e => setFormData({ ...formData, category: e.target.value as any })}
                                     >
@@ -334,8 +334,8 @@ export const EventBuilder: React.FC = () => {
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Banner URL</label>
-                                <input className="w-full border rounded-md p-2"
+                                <label className="block text-sm font-medium text-surface-200 mb-1">Banner URL</label>
+                                <input className="w-full border rounded-md p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
                                     value={formData.bannerImage}
                                     onChange={e => setFormData({ ...formData, bannerImage: e.target.value })}
                                 />
@@ -345,13 +345,13 @@ export const EventBuilder: React.FC = () => {
 
                     {activeStep === 'THEME' && (
                         <div className="space-y-6">
-                            <div className="bg-blue-50 p-4 rounded-lg text-sm text-blue-800 mb-4">
+                            <div className="bg-brand-900/20 p-4 rounded-lg text-sm text-brand-300 mb-4">
                                 <p>Select a preset or customize individual elements. Changes update the preview instantly.</p>
                             </div>
 
                             {/* Theme Templates Section */}
                             <div>
-                                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
+                                <label className="flex items-center gap-2 text-sm font-medium text-surface-200 mb-3">
                                     <Sparkles size={16} /> Theme Templates
                                 </label>
                                 <div className="grid grid-cols-2 gap-3">
@@ -365,20 +365,20 @@ export const EventBuilder: React.FC = () => {
                                                 <div className="w-4 h-4 rounded-full" style={{ backgroundColor: template.config.primaryColor }}></div>
                                                 <div className="w-4 h-4 rounded-full" style={{ backgroundColor: template.config.secondaryColor }}></div>
                                             </div>
-                                            <div className="text-xs font-semibold text-gray-900 group-hover:text-brand-600">{template.name}</div>
-                                            <div className="text-[10px] text-gray-500 capitalize">{template.config.layout} • {template.config.fontFamily}</div>
+                                            <div className="text-xs font-semibold text-white group-hover:text-brand-400">{template.name}</div>
+                                            <div className="text-[10px] text-surface-300 capitalize">{template.config.layout} • {template.config.fontFamily}</div>
                                         </button>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="border-t border-gray-100 pt-4">
-                                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
+                            <div className="border-t border-white/5 pt-4">
+                                <label className="flex items-center gap-2 text-sm font-medium text-surface-200 mb-3">
                                     <Palette size={16} /> Fine-tune Colors
                                 </label>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <span className="text-xs text-gray-500">Primary</span>
+                                        <span className="text-xs text-surface-300">Primary</span>
                                         <div className="flex items-center gap-2 mt-1">
                                             <input type="color" className="h-8 w-8 rounded cursor-pointer border-0"
                                                 value={formData.theme?.primaryColor}
@@ -388,7 +388,7 @@ export const EventBuilder: React.FC = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <span className="text-xs text-gray-500">Secondary</span>
+                                        <span className="text-xs text-surface-300">Secondary</span>
                                         <div className="flex items-center gap-2 mt-1">
                                             <input type="color" className="h-8 w-8 rounded cursor-pointer border-0"
                                                 value={formData.theme?.secondaryColor}
@@ -398,7 +398,7 @@ export const EventBuilder: React.FC = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <span className="text-xs text-gray-500">Background</span>
+                                        <span className="text-xs text-surface-300">Background</span>
                                         <div className="flex items-center gap-2 mt-1">
                                             <input type="color" className="h-8 w-8 rounded cursor-pointer border-0"
                                                 value={formData.theme?.backgroundColor}
@@ -408,7 +408,7 @@ export const EventBuilder: React.FC = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <span className="text-xs text-gray-500">Text</span>
+                                        <span className="text-xs text-surface-300">Text</span>
                                         <div className="flex items-center gap-2 mt-1">
                                             <input type="color" className="h-8 w-8 rounded cursor-pointer border-0"
                                                 value={formData.theme?.textColor}
@@ -421,11 +421,11 @@ export const EventBuilder: React.FC = () => {
                             </div>
 
                             <div>
-                                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
+                                <label className="flex items-center gap-2 text-sm font-medium text-surface-200 mb-3">
                                     <Type size={16} /> Typography
                                 </label>
                                 <select
-                                    className="w-full border rounded-md p-2"
+                                    className="w-full border rounded-md p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
                                     value={formData.theme?.fontFamily}
                                     onChange={e => handleThemeChange('fontFamily', e.target.value)}
                                 >
@@ -436,7 +436,7 @@ export const EventBuilder: React.FC = () => {
                             </div>
 
                             <div>
-                                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
+                                <label className="flex items-center gap-2 text-sm font-medium text-surface-200 mb-3">
                                     <Layout size={16} /> Page Layout
                                 </label>
                                 <div className="grid grid-cols-2 gap-3">
@@ -444,7 +444,7 @@ export const EventBuilder: React.FC = () => {
                                         <button
                                             key={l}
                                             onClick={() => handleThemeChange('layout', l)}
-                                            className={`p-3 border rounded-lg text-sm capitalize ${formData.theme?.layout === l ? 'border-brand-500 bg-brand-50 text-brand-700' : 'hover:bg-gray-50'}`}
+                                            className={`p-3 border rounded-lg text-sm capitalize ${formData.theme?.layout === l ? 'border-brand-500 bg-brand-900/30 text-brand-300' : 'hover:bg-surface-900'}`}
                                         >
                                             {l}
                                         </button>
@@ -456,12 +456,12 @@ export const EventBuilder: React.FC = () => {
 
                     {activeStep === 'MODULES' && (
                         <div className="space-y-4">
-                            <p className="text-sm text-gray-600 mb-4">Configure features for your event page.</p>
+                            <p className="text-sm text-surface-300 mb-4">Configure features for your event page.</p>
                             {formData.modules?.map((module, index) => (
                                 <div key={module.id} className="border rounded-lg overflow-hidden mb-4">
-                                    <div className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors">
+                                    <div className="flex items-center justify-between p-4 bg-surface-900 hover:bg-[var(--bg)] transition-colors">
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${module.isEnabled ? 'bg-brand-100 text-brand-600' : 'bg-gray-200 text-gray-400'}`}>
+                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${module.isEnabled ? 'bg-brand-100 text-brand-400' : 'bg-surface-700 text-surface-400'}`}>
                                                 {module.type === 'REGISTRATION' && <CheckCircle size={20} />}
                                                 {module.type === 'SCHEDULE' && <Calendar size={20} />}
                                                 {module.type === 'LEADERBOARD' && <Trophy size={20} />}
@@ -472,10 +472,10 @@ export const EventBuilder: React.FC = () => {
                                                 {module.type === 'TEAM_FORMATION' && <Users size={20} />}
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="font-medium text-gray-900 capitalize">{module.type.toLowerCase().replace('_', ' ')}</span>
-                                                {module.type === 'REGISTRATION' && <span className="text-[10px] text-gray-500">Configure signup form</span>}
-                                                {module.type === 'QR_CHECKIN' && <span className="text-[10px] text-gray-500">Enable ticket generation</span>}
-                                                {module.type === 'TEAM_FORMATION' && <span className="text-[10px] text-gray-500">Group management</span>}
+                                                <span className="font-medium text-white capitalize">{module.type.toLowerCase().replace('_', ' ')}</span>
+                                                {module.type === 'REGISTRATION' && <span className="text-[10px] text-surface-300">Configure signup form</span>}
+                                                {module.type === 'QR_CHECKIN' && <span className="text-[10px] text-surface-300">Enable ticket generation</span>}
+                                                {module.type === 'TEAM_FORMATION' && <span className="text-[10px] text-surface-300">Group management</span>}
                                             </div>
                                         </div>
                                         <label className="relative inline-flex items-center cursor-pointer">
@@ -486,26 +486,26 @@ export const EventBuilder: React.FC = () => {
                                                     setFormData({ ...formData, modules: newModules });
                                                 }}
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                                            <div className="w-11 h-6 bg-surface-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-800 after:border-white/20 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
                                         </label>
                                     </div>
 
                                     {/* MODULE SPECIFIC CONFIGURATION */}
                                     {module.isEnabled && module.type === 'REGISTRATION' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Form Builder</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Form Builder</h4>
                                             <div className="space-y-3">
                                                 {(module.data as RegistrationFormField[])?.map((field) => (
-                                                    <div key={field.id} className="bg-gray-50 p-2 rounded border border-gray-200">
+                                                    <div key={field.id} className="bg-surface-900 p-2 rounded border border-white/10">
                                                         <div className="flex gap-2 mb-2">
                                                             <input
-                                                                className="w-full text-sm font-semibold bg-transparent border-b border-gray-300 focus:border-brand-500 outline-none pb-1"
+                                                                className="w-full text-sm font-semibold bg-transparent border-b border-white/20 focus:border-brand-500 outline-none pb-1"
                                                                 value={field.label}
                                                                 onChange={e => updateRegistrationField(module.id, field.id, 'label', e.target.value)}
                                                                 placeholder="Field Label"
                                                             />
                                                             <select
-                                                                className="text-xs border rounded p-1 bg-white"
+                                                                className="text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10 bg-surface-800"
                                                                 value={field.type}
                                                                 onChange={e => updateRegistrationField(module.id, field.id, 'type', e.target.value)}
                                                             >
@@ -519,14 +519,14 @@ export const EventBuilder: React.FC = () => {
                                                             </button>
                                                         </div>
 
-                                                        <div className="flex items-center gap-4 text-xs text-gray-600">
+                                                        <div className="flex items-center gap-4 text-xs text-surface-300">
                                                             <label className="flex items-center gap-1">
                                                                 <input type="checkbox" checked={field.required} onChange={e => updateRegistrationField(module.id, field.id, 'required', e.target.checked)} />
                                                                 Required
                                                             </label>
                                                             {field.type === 'select' && (
                                                                 <input
-                                                                    className="flex-1 border rounded p-1 bg-white"
+                                                                    className="flex-1 border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10 bg-surface-800"
                                                                     placeholder="Options (comma separated)"
                                                                     value={field.options?.join(', ')}
                                                                     onChange={e => updateRegistrationField(module.id, field.id, 'options', e.target.value.split(',').map(s => s.trim()))}
@@ -548,23 +548,23 @@ export const EventBuilder: React.FC = () => {
                                     )}
 
                                     {module.isEnabled && module.type === 'SCHEDULE' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Schedule Items</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Schedule Items</h4>
                                             <div className="space-y-3">
                                                 {(module.data as ScheduleItem[])?.map(item => (
-                                                    <div key={item.id} className="grid grid-cols-12 gap-2 items-center bg-gray-50 p-2 rounded">
+                                                    <div key={item.id} className="grid grid-cols-12 gap-2 items-center bg-surface-900 p-2 rounded">
                                                         <div className="col-span-3">
-                                                            <input className="w-full text-xs border rounded p-1" type="time" value={item.time}
+                                                            <input className="w-full text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10" type="time" value={item.time}
                                                                 onChange={e => updateScheduleItem(module.id, item.id, 'time', e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="col-span-4">
-                                                            <input className="w-full text-xs border rounded p-1" placeholder="Title" value={item.title}
+                                                            <input className="w-full text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10" placeholder="Title" value={item.title}
                                                                 onChange={e => updateScheduleItem(module.id, item.id, 'title', e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="col-span-4">
-                                                            <input className="w-full text-xs border rounded p-1" placeholder="Loc" value={item.location}
+                                                            <input className="w-full text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10" placeholder="Loc" value={item.location}
                                                                 onChange={e => updateScheduleItem(module.id, item.id, 'location', e.target.value)}
                                                             />
                                                         </div>
@@ -583,21 +583,21 @@ export const EventBuilder: React.FC = () => {
                                     )}
 
                                     {module.isEnabled && module.type === 'LEADERBOARD' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Teams & Scores</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Teams & Scores</h4>
                                             <div className="space-y-3">
                                                 {(module.data as LeaderboardEntry[])?.map((item, idx) => (
-                                                    <div key={item.id} className="grid grid-cols-12 gap-2 items-center bg-gray-50 p-2 rounded">
-                                                        <div className="col-span-1 text-xs font-mono text-gray-500 text-center">
+                                                    <div key={item.id} className="grid grid-cols-12 gap-2 items-center bg-surface-900 p-2 rounded">
+                                                        <div className="col-span-1 text-xs font-mono text-surface-300 text-center">
                                                             #{idx + 1}
                                                         </div>
                                                         <div className="col-span-7">
-                                                            <input className="w-full text-xs border rounded p-1" placeholder="Team Name" value={item.team}
+                                                            <input className="w-full text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10" placeholder="Team Name" value={item.team}
                                                                 onChange={e => updateLeaderboardEntry(module.id, item.id, 'team', e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="col-span-3">
-                                                            <input className="w-full text-xs border rounded p-1" type="number" placeholder="Pts" value={item.points}
+                                                            <input className="w-full text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10" type="number" placeholder="Pts" value={item.points}
                                                                 onChange={e => updateLeaderboardEntry(module.id, item.id, 'points', parseInt(e.target.value))}
                                                             />
                                                         </div>
@@ -616,14 +616,14 @@ export const EventBuilder: React.FC = () => {
                                     )}
 
                                     {module.isEnabled && module.type === 'VOTING' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Live Polls</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Live Polls</h4>
                                             <div className="space-y-4">
                                                 {(module.data as VotingPoll[])?.map((poll, idx) => (
-                                                    <div key={poll.id} className="bg-gray-50 p-3 rounded border border-gray-200">
+                                                    <div key={poll.id} className="bg-surface-900 p-3 rounded border border-white/10">
                                                         <div className="flex justify-between items-start mb-2">
                                                             <input
-                                                                className="w-full text-sm font-medium bg-transparent border-b border-gray-300 focus:border-brand-500 outline-none pb-1 mr-2"
+                                                                className="w-full text-sm font-medium bg-transparent border-b border-white/20 focus:border-brand-500 outline-none pb-1 mr-2"
                                                                 value={poll.question}
                                                                 onChange={e => updateVotingPoll(module.id, poll.id, 'question', e.target.value)}
                                                                 placeholder="Poll Question"
@@ -632,12 +632,12 @@ export const EventBuilder: React.FC = () => {
                                                                 <Trash2 size={14} />
                                                             </button>
                                                         </div>
-                                                        <div className="pl-2 space-y-2 border-l-2 border-gray-200 ml-1">
+                                                        <div className="pl-2 space-y-2 border-l-2 border-white/10 ml-1">
                                                             {poll.options.map(opt => (
                                                                 <div key={opt.id} className="flex items-center gap-2">
                                                                     <div className="w-2 h-2 rounded-full bg-gray-400"></div>
                                                                     <input
-                                                                        className="w-full text-xs bg-white border rounded p-1"
+                                                                        className="w-full text-xs bg-surface-800 border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10"
                                                                         value={opt.text}
                                                                         onChange={e => updateVotingOption(module.id, poll.id, opt.id, e.target.value)}
                                                                     />
@@ -654,20 +654,20 @@ export const EventBuilder: React.FC = () => {
                                     )}
 
                                     {module.isEnabled && module.type === 'ANNOUNCEMENTS' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Feed Updates</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Feed Updates</h4>
                                             <div className="space-y-3">
                                                 {(module.data as Announcement[])?.map((item) => (
-                                                    <div key={item.id} className="bg-gray-50 p-2 rounded border border-gray-200 space-y-2">
+                                                    <div key={item.id} className="bg-surface-900 p-2 rounded border border-white/10 space-y-2">
                                                         <div className="flex justify-between">
                                                             <input
-                                                                className="text-sm font-semibold bg-transparent border-b border-gray-300 focus:border-brand-500 outline-none w-2/3"
+                                                                className="text-sm font-semibold bg-transparent border-b border-white/20 focus:border-brand-500 outline-none w-2/3"
                                                                 value={item.title}
                                                                 onChange={e => updateAnnouncement(module.id, item.id, 'title', e.target.value)}
                                                                 placeholder="Title"
                                                             />
                                                             <select
-                                                                className="text-xs border rounded p-1"
+                                                                className="text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10"
                                                                 value={item.priority}
                                                                 onChange={e => updateAnnouncement(module.id, item.id, 'priority', e.target.value)}
                                                             >
@@ -677,13 +677,13 @@ export const EventBuilder: React.FC = () => {
                                                             </select>
                                                         </div>
                                                         <textarea
-                                                            className="w-full text-xs bg-white border rounded p-1 h-16"
+                                                            className="w-full text-xs bg-surface-800 border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10 h-16"
                                                             value={item.message}
                                                             onChange={e => updateAnnouncement(module.id, item.id, 'message', e.target.value)}
                                                             placeholder="Announcement message..."
                                                         />
                                                         <div className="flex justify-between items-center">
-                                                            <span className="text-[10px] text-gray-400">{new Date(item.timestamp).toLocaleString()}</span>
+                                                            <span className="text-[10px] text-surface-400">{new Date(item.timestamp).toLocaleString()}</span>
                                                             <button onClick={() => removeAnnouncement(module.id, item.id)} className="text-red-500 hover:text-red-700">
                                                                 <Trash2 size={12} />
                                                             </button>
@@ -698,16 +698,16 @@ export const EventBuilder: React.FC = () => {
                                     )}
 
                                     {module.isEnabled && module.type === 'GALLERY' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Image URLs</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Image URLs</h4>
                                             <div className="space-y-2">
                                                 {(module.data as string[])?.map((url, idx) => (
                                                     <div key={idx} className="flex gap-2 items-center">
-                                                        <div className="h-8 w-8 rounded bg-gray-100 overflow-hidden flex-shrink-0">
+                                                        <div className="h-8 w-8 rounded bg-[var(--bg)] overflow-hidden flex-shrink-0">
                                                             <img src={url} alt="" className="h-full w-full object-cover" />
                                                         </div>
                                                         <input
-                                                            className="w-full text-xs border rounded p-1"
+                                                            className="w-full text-xs border rounded p-1 bg-surface-950 text-white placeholder-surface-500 border-white/10"
                                                             value={url}
                                                             onChange={e => updateGalleryImage(module.id, idx, e.target.value)}
                                                         />
@@ -724,21 +724,21 @@ export const EventBuilder: React.FC = () => {
                                     )}
 
                                     {module.isEnabled && module.type === 'TEAM_FORMATION' && (
-                                        <div className="p-4 border-t border-gray-200 bg-white">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Team Rules</h4>
+                                        <div className="p-4 border-t border-white/10 bg-surface-800">
+                                            <h4 className="text-xs font-bold text-surface-300 uppercase mb-3">Team Rules</h4>
                                             <div className="space-y-4">
                                                 <div>
-                                                    <label className="block text-xs font-medium text-gray-700 mb-1">Max Team Size</label>
+                                                    <label className="block text-xs font-medium text-surface-200 mb-1">Max Team Size</label>
                                                     <input
                                                         type="number"
-                                                        className="w-full border rounded p-2 text-sm"
+                                                        className="w-full border rounded p-2 bg-surface-950 text-white placeholder-surface-500 border-white/10 text-sm"
                                                         value={(module.data as TeamFormationData).maxTeamSize}
                                                         onChange={e => updateTeamConfig(module.id, 'maxTeamSize', parseInt(e.target.value))}
                                                         min={1}
                                                         max={20}
                                                     />
                                                 </div>
-                                                <div className="p-3 bg-blue-50 text-blue-800 rounded text-xs">
+                                                <div className="p-3 bg-brand-900/20 text-brand-300 rounded text-xs">
                                                     Enable this module to allow participants to form teams, invite members, and manage their roster directly on the event page.
                                                 </div>
                                             </div>
@@ -751,7 +751,7 @@ export const EventBuilder: React.FC = () => {
                     )}
                 </div>
 
-                <div className="p-6 border-t border-gray-200 bg-gray-50">
+                <div className="p-6 border-t border-white/10 bg-surface-900">
                     <Button className="w-full gap-2" onClick={handlePublish}>
                         <Save size={18} />
                         {editId ? 'Save Changes' : 'Publish Event'}
@@ -760,10 +760,10 @@ export const EventBuilder: React.FC = () => {
             </div>
 
             {/* RIGHT PANEL - PREVIEW */}
-            <div className="w-2/3 bg-gray-100 p-8 overflow-y-auto">
+            <div className="w-2/3 bg-[var(--bg)] p-8 overflow-y-auto">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wide">Live Preview</h2>
+                        <h2 className="text-sm font-bold text-surface-300 uppercase tracking-wide">Live Preview</h2>
                         <div className="flex gap-2">
                             <span className="h-3 w-3 rounded-full bg-red-400"></span>
                             <span className="h-3 w-3 rounded-full bg-yellow-400"></span>
@@ -772,7 +772,7 @@ export const EventBuilder: React.FC = () => {
                     </div>
 
                     {/* PREVIEW IFRAME SIMULATION */}
-                    <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 min-h-[800px] transform scale-95 origin-top">
+                    <div className="bg-surface-800 rounded-xl shadow-2xl overflow-hidden border border-white/10 min-h-[800px] transform scale-95 origin-top">
                         <PreviewContent data={formData as Event} />
                     </div>
                 </div>
@@ -867,11 +867,11 @@ const PreviewContent: React.FC<{ data: Event }> = ({ data }) => {
                             <div className="space-y-2 opacity-60">
                                 {(getModuleData('REGISTRATION') as RegistrationFormField[]).length > 0 ?
                                     (getModuleData('REGISTRATION') as RegistrationFormField[]).map(f => (
-                                        <div key={f.id} className="text-xs bg-gray-100 p-1 rounded border border-gray-300 inline-block mr-1">
+                                        <div key={f.id} className="text-xs bg-[var(--bg)] p-1 rounded border border-white/20 inline-block mr-1">
                                             {f.label} {f.required && '*'}
                                         </div>
                                     ))
-                                    : <span className="text-xs italic">Default registration form</span>}
+                                    : <span className="text-xs text-brand-300 italic">Default registration form</span>}
                             </div>
                         </div>
                     )}
@@ -897,11 +897,11 @@ const PreviewContent: React.FC<{ data: Event }> = ({ data }) => {
                         <div className="border border-[var(--text)]/20 rounded p-4">
                             <h3 className="font-bold border-b border-[var(--text)]/10 pb-2 mb-2 flex items-center gap-2"><Users size={16} /> Teams</h3>
                             <div className="grid grid-cols-2 gap-2">
-                                <div className="border border-[var(--text)]/10 p-2 rounded bg-gray-50/50">
+                                <div className="border border-[var(--text)]/10 p-2 rounded bg-surface-900/50">
                                     <div className="font-bold text-xs">Rocket Team</div>
                                     <div className="text-[10px] opacity-60">3 / {(getModuleData('TEAM_FORMATION') as TeamFormationData).maxTeamSize} members</div>
                                 </div>
-                                <div className="border border-[var(--text)]/10 p-2 rounded bg-gray-50/50">
+                                <div className="border border-[var(--text)]/10 p-2 rounded bg-surface-900/50">
                                     <div className="font-bold text-xs">Code Ninjas</div>
                                     <div className="text-[10px] opacity-60">2 / {(getModuleData('TEAM_FORMATION') as TeamFormationData).maxTeamSize} members</div>
                                 </div>
@@ -934,7 +934,7 @@ const PreviewContent: React.FC<{ data: Event }> = ({ data }) => {
                             <h3 className="font-bold border-b border-[var(--text)]/10 pb-2 mb-2 flex items-center gap-2"><Image size={16} /> Gallery</h3>
                             <div className="grid grid-cols-3 gap-2">
                                 {getModuleData('GALLERY').length > 0 ? getModuleData('GALLERY').slice(0, 3).map((url: string, i: number) => (
-                                    <div key={i} className="aspect-square bg-gray-100 rounded overflow-hidden">
+                                    <div key={i} className="aspect-square bg-[var(--bg)] rounded overflow-hidden">
                                         <img src={url} className="w-full h-full object-cover" />
                                     </div>
                                 )) : <span className="col-span-3 text-sm opacity-50 italic">No images</span>}

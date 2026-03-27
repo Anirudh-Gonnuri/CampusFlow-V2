@@ -3,7 +3,7 @@
   line-height: 1.6;
   font-weight: 400;
   color-scheme: dark;
-  color: #e8e8f0;
+  color: #ffffff;
   background-color: #0d0d14;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,7 +24,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #0d0d14;
-  color: #e8e8f0;
+  color: #ffffff;
 }
 
 #root { width: 100%; }
